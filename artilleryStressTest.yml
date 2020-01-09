@@ -1,0 +1,14 @@
+config:
+  target: 'http://localhost:3000'
+  phases:
+    - duration: 60
+      arrivalRate: 20
+      rampTo: 200
+      name: 'Warm up app: 20 to 200 VU/s for 60 seconds'
+    - duration: 60
+      arrivalRate: 200
+      name: 'Sustain constant arrival of 200 VU/s for 60 seconds'
+scenarios:
+  - flow:
+    - get:
+        url: "/"
