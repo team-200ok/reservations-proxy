@@ -1,9 +1,17 @@
+const newrelic = require('newrelic');
+const proxy = require('http-proxy-middleware');
 const express = require('express');
 const path = require('path');
 // const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
+// const { Pool } = require('pg')
 
-app.use('/:id', express.static(path.join(__dirname, 'public')));
+// const pool = new Pool({ database: 'ReservationsModule' })
 
-app.listen(port, () => console.log('Serving up fresh reviews on port', port));
+app.use(
+  '/',
+  proxy({ target: 'http://3.87.66.190:3010', changeOrigin: true })
+);
+
+app.listen(port, () => console.log(`We be serving at port: ${port}`));
